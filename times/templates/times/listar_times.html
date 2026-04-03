@@ -1,0 +1,43 @@
+{% extends 'times/base.html' %}
+
+{% block title %}Times de Futebol{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Times de Futebol</h1>
+
+<a href="#" class="btn btn-success mb-3">+ Cadastrar Novo Time</a>
+
+<table class="table table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>País</th>
+            <th>Estado</th>
+            <th>Cidade</th>
+            <th>Ano de Fundação</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody class="table-secondary">
+        {% for time in times %}
+        <tr>
+            <td>{{ time.id }}</td>
+            <td>{{ time.nome }}</td>
+            <td>{{ time.pais }}</td>
+            <td>{{ time.estado }}</td>
+            <td>{{ time.cidade }}</td>
+            <td>{{ time.ano_fundacao }}</td>
+            <td>
+                <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">Nenhum time cadastrado no sistema.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
