@@ -29,3 +29,10 @@ def editar_time(request, pk):
     else:
         form = TimeForm(instance=time)
     return render(request, 'times/form_time.html', {'form': form, 'titulo': 'Editar Time'})
+
+def deletar_time(request, pk):
+    time = get_object_or_404(Time, pk=pk)
+    if request.method == 'POST':
+        time.delete()
+        return redirect('listar_times')
+    return render(request, 'times/confirm_delete.html', {'time': time})
