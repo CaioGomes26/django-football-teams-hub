@@ -36,3 +36,7 @@ def deletar_time(request, pk):
         time.delete()
         return redirect('listar_times')
     return render(request, 'times/confirm_delete.html', {'time': time})
+
+def home(request):
+    total_times = Time.objects.count()
+    return render(request, 'times/home.html', {'total_times': total_times})
