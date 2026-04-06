@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Time
 from .forms import TimeForm
 
@@ -17,4 +17,15 @@ def cadastrar_time(request):
     else:
         form = TimeForm()
     
-    return render(request, 'times/form_time.html', {'form': form})
+    return render(request, 'times/form_time.html', {'form': form, 'titulo': 'Cadastrar Novo Time'})
+
+def editar_time(request, pk):
+    time = get_object_or_404(Time, pk=pk)
+    if request.method == 'POST':
+        form = TimeForm(request.POST, instance=time)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_times')
+    else:
+        form = TimeForm(instance=time)
+    return render(request, 'times/form_time.html', {'form': form, 'titulo': 'Editar Time'})
